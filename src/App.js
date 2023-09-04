@@ -1,9 +1,9 @@
 import './App.css';
-import Comp from "./components/Comp.js";
+import Table from "./components/Comp.js";
 const App =()=>{
   return(
  <> 
- <Comp/>
+ <Table/>
  </>
  )
 }
