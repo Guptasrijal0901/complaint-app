@@ -27,14 +27,8 @@ const handlecreate = async()=>{
 
 setcomp("")
 setroll("")
-const response = await axios.post("/create", {
-name,
-email,
-branch, 
-roll,
-date,
-phone,
-comp
+const response = await axios.post("/api/create", {
+name, email, branch,  roll, date, phone, comp
 });
 console.log(response);
 if(response.data.success){
@@ -45,7 +39,7 @@ if(response.data.success){
 
 //read
 const gettable = async()=>{
-  let response = await axios.get("/read");
+  let response = await axios.get("/api/read");
   if (response.data.success){
     console.log(response.data.data);
     setdata(response.data.data);
@@ -86,6 +80,7 @@ return(
     <input type="text" className="form-control" id="inputname"
     placeholder='Enter your name'
     value={name}
+    for= "name"
     onChange={(e)=>setname(e.target.value)}
     />
   </div>
@@ -94,6 +89,7 @@ return(
     <input type="email" className="form-control" id="email"
     placeholder='Enter your email'
     value={email}
+    for= "email"
     onChange={(e)=>setemail(e.target.value)}
     />
   </div>
@@ -102,6 +98,7 @@ return(
     <input type="text" className="form-control" id="branch"
     placeholder='Enter your branch'
     value={branch}
+    for = "branch"
     onChange={(e)=>setbranch(e.target.value)}
     />
   </div>
@@ -110,6 +107,7 @@ return(
     <input type="number" className="form-control" id="roll"
     placeholder='Enter your roll no.'
     value={roll}
+    for = "roll"
     onChange={(e)=>setroll(e.target.value)}
     />
   </div>
@@ -118,6 +116,7 @@ return(
     <input type="date" className="form-control" id="date"
       placeholder="Enter date"
       value={date}
+      
     onChange={(e)=>setdate(e.target.value)}
     />
   </div><div className="col-md-6">
