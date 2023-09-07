@@ -11,3 +11,7 @@ app.use(express.static("client/build"));
     );
   });
 npm i path 
+
+check both have same port 
+
+

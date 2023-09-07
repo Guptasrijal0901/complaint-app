@@ -6,15 +6,15 @@ import axios from "axios";
 const Table = ()=> {
   useEffect(()=>{
     gettable();
-  }, [])
-const [data, setdata] = useState([]);
+  }, []);
+const [task, settask] = useState([]);
 const [name, setname] = useState("");
-const [roll, setroll] = useState("");
-const [branch, setbranch] = useState("");
-const [phone, setphone] = useState("");
 const [email, setemail] = useState("");
+const [branch, setbranch] = useState("");
+const [roll, setroll] = useState("");
+const [phone, setphone] = useState("");
 const [comp, setcomp] = useState("");
-const [date, setdate] = useState();
+const [date, setdate] = useState("");
 
 
 // create
@@ -24,7 +24,6 @@ const handlecreate = async()=>{
   }else if (roll.trim()==="") {
     alert("Provide your rRoll number")
   }
-
 setcomp("")
 setroll("")
 const response = await axios.post("/api/create", {
@@ -41,47 +40,46 @@ if(response.data.success){
 const gettable = async()=>{
   let response = await axios.get("/api/read");
   if (response.data.success){
-    console.log(response.data.data);
-    setdata(response.data.data);
+    // console.log(response.data.table);
+    settask(response.data.table);
   }else{
     alert("Somthing went wrong")
   }
 }
 //update
 const handleupdate = (index, newcomp)=>{
-  const olddata = [...data];
+  const oldtask = [...task];
   // olddata[index].name= newname;
   // olddata[index].email= newemail;
   // olddata[index].branch= newbranch;
   // olddata[index].roll= newroll;
   // olddata[index].date= newdate;
   // olddata[index].phone= newphone;
-  olddata[index].comp= newcomp;
-  gettable(olddata);
+  oldtask[index].comp= newcomp;
+  settask(oldtask);
 }
 
 // delete
-const handledelete = async (dataid)=>{
-  let response = await axios.delete(`/delete/${dataid}`);
+const handledelete = async (taskid)=>{
+  let response = await axios.delete(`/delete/${taskid}`);
   if (response.data.success){
     gettable();
   }else{
     alert("Somthing went wrong")
   }
 }
-
-
 return(
   <>
   <div className='heading'><h1> Complaint Station of MMMUT Gorakhpur </h1></div>
-  <form className="main">
+  <div className="main">
   <div className="col-md-6">
     <label  className="form-label">Name</label>
     <input type="text" className="form-control" id="inputname"
     placeholder='Enter your name'
     value={name}
-    for= "name"
+    // for= "name"
     onChange={(e)=>setname(e.target.value)}
+    // required
     />
   </div>
   <div className="col-md-6">
@@ -89,7 +87,7 @@ return(
     <input type="email" className="form-control" id="email"
     placeholder='Enter your email'
     value={email}
-    for= "email"
+    // for= "email"
     onChange={(e)=>setemail(e.target.value)}
     />
   </div>
@@ -98,7 +96,8 @@ return(
     <input type="text" className="form-control" id="branch"
     placeholder='Enter your branch'
     value={branch}
-    for = "branch"
+    // for = "branch"
+    // required
     onChange={(e)=>setbranch(e.target.value)}
     />
   </div>
@@ -107,7 +106,8 @@ return(
     <input type="number" className="form-control" id="roll"
     placeholder='Enter your roll no.'
     value={roll}
-    for = "roll"
+    // for = "roll"
+    // required
     onChange={(e)=>setroll(e.target.value)}
     />
   </div>
@@ -116,7 +116,8 @@ return(
     <input type="date" className="form-control" id="date"
       placeholder="Enter date"
       value={date}
-      
+      // for= "date"
+      // required
     onChange={(e)=>setdate(e.target.value)}
     />
   </div><div className="col-md-6">
@@ -125,6 +126,8 @@ return(
       placeholder="Enter your number"
       value={phone}
     onChange={(e)=>setphone(e.target.value)}
+    // for = "phone"
+    // required
     />
   </div>
   <div className="col-10">
@@ -133,48 +136,39 @@ return(
       placeholder="What's your complaint"
       value={comp}
     onChange={(e)=>setcomp(e.target.value)}
+    // for= "comp"
+    // required
     />
   </div>
   <button
     type='button'
     className="btn btn-primary"
-    onClick={()=>handlecreate}
+    onClick={()=>handlecreate()}
+    
     > Submit </button>
-    {/* <button
-    type='button'
-    className="btn btn-primary"
-    onClick={()=>setdata}>Show Data </button> */}
-</form>
+</div>
 
 
-{data.map((v, i )=>{
+{task.map((v, i )=>{
   return(
-    <>
-      <div 
-      key={i} 
-      id='table'
-      className='map'>
+      <div className='main'>
       <h3>Complaints:</h3>
-        
-        <ul>
-          <li> Name : {v.Cname}</li>
-          <li> Email : {v.Cemail}</li>
-          <li> Branch : {v.Cbranch}</li>
-          <li> Roll no. : {v.Croll}</li>
-          <li> Date : {v.Cdate}</li>
-          <li> Phone no. : {v.Cphone}</li>
-          <li> Complaint : {v.Ccomp}</li>
+        <ul
+        key={i}
+      id='table'>
+          <li>Name : {v.name}</li>
+          <li>Email : {v.email}</li>
+          <li>Branch : {v.branch}</li>
+          <li>Roll no : {v.roll}</li>
+          <li> Date : {v.date}</li>
+          <li>Phone no. : {v.phone}</li>
+          <li>Complaint : {v.comp}</li>
           </ul>
-        
-                <input
-                  type="text"
-                  onChange={() => {
-                  }}
-                />
                 <button
                   onClick={() => {
                     handleupdate(v._id);
-                  }}>
+                  }}
+                  className="btn btn-primary">
                   {" "}
                   Update
                 </button>
@@ -183,11 +177,12 @@ return(
                   onClick={() => {
                     handledelete(v._id);
                   }}
+                  className="btn btn-primary"
                 >
                   Delete
                 </button>
                 </div>
-    </>
+
   )
 })}
   </>
