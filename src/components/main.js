@@ -74,7 +74,7 @@ return(
   <div className="main">
   <div className="col-md-6">
     <label  className="form-label">Name</label>
-    <input type="text" className="form-control" id="inputname"
+    <input type="text" className="form-control"
     placeholder='Enter your name'
     value={name}
     // for= "name"
@@ -84,7 +84,7 @@ return(
   </div>
   <div className="col-md-6">
     <label  className="form-label">Email</label>
-    <input type="email" className="form-control" id="email"
+    <input type="email" className="form-control"
     placeholder='Enter your email'
     value={email}
     // for= "email"
@@ -93,7 +93,7 @@ return(
   </div>
   <div className="col-md-6">
     <label  className="form-label">Branch</label>
-    <input type="text" className="form-control" id="branch"
+    <input type="text" className="form-control" 
     placeholder='Enter your branch'
     value={branch}
     // for = "branch"
@@ -103,7 +103,7 @@ return(
   </div>
   <div className="col-md-6">
     <label className="form-label">Roll no.</label>
-    <input type="number" className="form-control" id="roll"
+    <input type="number" className="form-control" 
     placeholder='Enter your roll no.'
     value={roll}
     // for = "roll"
@@ -113,7 +113,7 @@ return(
   </div>
   <div className="col-md-6">
     <label className="form-label">Date</label>
-    <input type="date" className="form-control" id="date"
+    <input type="date" className="form-control" 
       placeholder="Enter date"
       value={date}
       // for= "date"
@@ -122,7 +122,7 @@ return(
     />
   </div><div className="col-md-6">
     <label className="form-label">Phone number</label>
-    <input type="number" className="form-control" id="phone"
+    <input type="number" className="form-control"
       placeholder="Enter your number"
       value={phone}
     onChange={(e)=>setphone(e.target.value)}
@@ -132,7 +132,7 @@ return(
   </div>
   <div className="col-10">
     <label  className="form-label">Complaint </label>
-    <input type="text" className="form-control" id="complaint" 
+    <input type="text" className="form-control"
       placeholder="What's your complaint"
       value={comp}
     onChange={(e)=>setcomp(e.target.value)}
@@ -143,9 +143,8 @@ return(
   <button
     type='button'
     className="btn btn-primary"
-    onClick={()=>handlecreate()}
-    
-    > Submit </button>
+    onClick={()=>handlecreate()}> 
+    Submit </button>
 </div>
 
 
